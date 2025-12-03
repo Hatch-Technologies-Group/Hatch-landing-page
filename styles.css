@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-color: #fafafa;
+    --text-color: #18181b;
+    --line-color: rgba(0,0,0,0.05);
+}
+
+.dark {
+    --bg-color: #020408;
+    --text-color: #e4e4e7;
+    --line-color: rgba(255,255,255,0.03);
+}
+
+@keyframes page-fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    animation: page-fade-in 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.text-gradient-hatch {
+    background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.dark .text-gradient-hatch {
+    background: linear-gradient(135deg, #3b82f6 0%, #34d399 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@keyframes clip-intro {
+    0% { clip-path: inset(100% 0 0 0); transform: translateY(20px); filter: blur(10px); }
+    100% { clip-path: inset(0 0 0 0); transform: translateY(0); filter: blur(0); }
+}
+.animate-intro {
+    animation: clip-intro 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
+
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    filter: blur(12px);
+    transition: all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1);
+}
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+.btn-beam {
+    position: relative;
+    overflow: hidden;
+}
+.btn-beam::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 300%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+    transform: skewX(-20deg);
+}
+.btn-beam:hover::after {
+    left: 100%;
+    transition: left 0.8s ease;
+}
+
+/* Updated Infinite Marquee - Right Direction */
+@keyframes marquee-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+}
+.animate-marquee-right {
+    display: flex;
+    width: max-content;
+    animation: marquee-right 60s linear infinite;
+}
+.animate-marquee-right:hover {
+    animation-play-state: paused;
+}
+
+.carousel-container { perspective: 1200px; }
+.carousel-card {
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.carousel-card.active {
+    transform: translateX(0) scale(1) translateZ(0);
+    z-index: 20;
+    opacity: 1;
+    filter: blur(0);
+}
+.carousel-card.prev {
+    transform: translateX(-20%) scale(0.85) translateZ(-100px) rotateY(8deg);
+    z-index: 10;
+    opacity: 0.4;
+    filter: blur(4px);
+    pointer-events: none;
+}
+.carousel-card.next {
+    transform: translateX(20%) scale(0.85) translateZ(-100px) rotateY(-8deg);
+    z-index: 10;
+    opacity: 0.4;
+    filter: blur(4px);
+    pointer-events: none;
+}
+.carousel-card.hidden-card {
+    transform: scale(0.7) translateZ(-200px);
+    opacity: 0;
+    z-index: 0;
+}
+
+.perspective-2000 { perspective: 2000px; }
+.hero-interface {
+    transform: rotateX(5deg) scale(0.95);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.hero-interface-container:hover .hero-interface {
+    transform: rotateX(0deg) scale(1);
+}
+
+.v-line {
+    background: linear-gradient(to bottom, transparent, var(--line-color) 15%, var(--line-color) 85%, transparent);
+    width: 1px;
+    height: 100%;
+    transition: background 0.5s ease;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb { background: #a1a1aa; border-radius: 3px; }
+.dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
+
+.toggle-btn-bg {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* FAQ Accordion Transitions */
+.faq-content {
+    transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq-icon {
+    transition: transform 0.3s ease;
+}
