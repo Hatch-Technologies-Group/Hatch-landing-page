@@ -24,6 +24,7 @@
         }
     </script>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body class="antialiased selection:bg-blue-500/20 selection:text-blue-600 dark:selection:bg-emerald-500/20 dark:selection:text-emerald-400 transition-colors duration-500">
 
@@ -66,9 +67,11 @@
 
     <!-- Hero Section -->
     <main class="relative z-10 pt-32 pb-20 overflow-hidden">
+        <!-- Particles Background -->
+        <div id="particles-js" class="absolute inset-0 z-0"></div>
         
         <!-- Hero Content -->
-        <div class="max-w-3xl mx-auto text-center px-6">
+        <div class="max-w-3xl mx-auto text-center px-6 relative z-10">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-100 dark:border-blue-900/30 bg-blue-50/50 dark:bg-blue-900/10 backdrop-blur-sm mb-8 animate-intro transition-colors">
                 <span class="relative flex h-2 w-2">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
@@ -100,7 +103,7 @@
         </div>
 
         <!-- Hero Interface -->
-        <div class="mt-20 max-w-5xl mx-auto px-4 md:px-6 perspective-2000 hero-interface-container animate-intro delay-500">
+        <div class="mt-20 max-w-5xl mx-auto px-4 md:px-6 perspective-2000 hero-interface-container animate-intro delay-500 relative z-10">
              <div class="relative w-full rounded-2xl bg-zinc-900/5 dark:bg-white/5 p-2.5 ring-[1.5px] ring-zinc-900/10 dark:ring-white/10 hero-interface">
                  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-blue-500/20 dark:bg-emerald-500/20 blur-[100px] -z-10 rounded-full"></div>
                  <div class="w-full bg-white dark:bg-[#0A0A0A] rounded-xl shadow-2xl overflow-hidden border-[1.5px] border-zinc-200 dark:border-white/10">
@@ -113,7 +116,7 @@
         </div>
 
         <!-- Logos -->
-        <div class="mt-24 border-y border-zinc-200 dark:border-white/5 bg-white/40 dark:bg-black/40 backdrop-blur-sm py-10 overflow-hidden reveal-on-scroll transition-colors duration-500">
+        <div class="mt-24 border-y border-zinc-200 dark:border-white/5 bg-white/40 dark:bg-black/40 backdrop-blur-sm py-10 overflow-hidden transition-colors duration-500 reveal-on-scroll">
             <div class="flex justify-center flex-wrap gap-12 md:gap-20 opacity-50 px-6 grayscale hover:grayscale-0 transition-all duration-700">
                 <svg class="h-6 w-auto text-zinc-900 dark:text-white fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path></svg>
                 <svg class="h-6 w-auto text-zinc-900 dark:text-white fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
@@ -124,10 +127,10 @@
     </main>
 
     <!-- Seamless Marquee Section (Moving Right) -->
-    <section class="py-20 bg-white dark:bg-zinc-950/50 border-b border-zinc-200 dark:border-white/5 relative overflow-hidden transition-colors duration-500">
+    <section class="py-20 bg-white dark:bg-zinc-950/50 border-b border-zinc-200 dark:border-white/5 relative overflow-hidden transition-colors duration-500 reveal-on-scroll fast-reveal">
         <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-white via-transparent to-white dark:from-black dark:via-transparent dark:to-black transition-colors duration-500"></div>
         
-        <div class="max-w-7xl mx-auto px-6 mb-12 text-center reveal-on-scroll">
+        <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
             <h2 class="text-3xl md:text-4xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-4 transition-colors">Uninterrupted Flow</h2>
             <p class="text-zinc-600 dark:text-zinc-400 transition-colors">Seamlessly integrated into how you naturally work.</p>
         </div>
@@ -236,7 +239,7 @@
     </section>
 
     <!-- Carousel Section -->
-    <section class="py-32 relative overflow-hidden reveal-on-scroll bg-zinc-50/50 dark:bg-black">
+    <section class="py-32 relative overflow-hidden reveal-on-scroll fast-reveal bg-zinc-50/50 dark:bg-black">
         <div class="max-w-4xl mx-auto px-6 text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-6 transition-colors">Designed to Disappear</h2>
             <p class="text-zinc-600 dark:text-zinc-400 text-lg transition-colors">The power you need, only when you need it.</p>
@@ -306,7 +309,7 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-24 relative z-10 border-t border-zinc-200 dark:border-white/5 bg-white dark:bg-zinc-950/80 backdrop-blur-3xl transition-colors duration-500 reveal-on-scroll">
+    <section id="pricing" class="py-24 relative z-10 border-t border-zinc-200 dark:border-white/5 bg-white/80 dark:bg-zinc-950/50 backdrop-blur-xl transition-colors duration-500 reveal-on-scroll">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-10">
                 <h2 class="text-3xl md:text-5xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-6">Hatch Pricing Plans</h2>
@@ -333,7 +336,7 @@
             </div>
 
             <!-- Pricing Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-20">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-20 stagger-children reveal-on-scroll">
                 <!-- 500 Seats -->
                 <div class="group relative p-6 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-white/5 rounded-2xl hover:border-blue-500/50 dark:hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between h-full">
                     <div>
@@ -563,7 +566,7 @@
                     <p class="text-zinc-500 dark:text-zinc-400 text-sm">Enhance your workspace with powerful extras.</p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children reveal-on-scroll">
                     <!-- White Label -->
                     <div class="flex flex-col p-6 rounded-2xl bg-zinc-50/50 dark:bg-white/5 border border-zinc-200 dark:border-white/5 hover:bg-white dark:hover:bg-zinc-900 hover:shadow-lg transition-all duration-300">
                         <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4"><i data-lucide="palette" class="w-5 h-5"></i></div>
@@ -629,11 +632,11 @@
     </section>
 
     <!-- FAQ Section (Redesigned) -->
-    <section class="py-24 border-t border-zinc-200 dark:border-white/5 bg-white dark:bg-zinc-950 relative z-10 reveal-on-scroll transition-colors duration-500">
+    <section class="py-24 border-t border-zinc-200 dark:border-white/5 bg-white/90 dark:bg-zinc-950/40 backdrop-blur-2xl relative z-10 reveal-on-scroll transition-colors duration-500">
         <div class="max-w-3xl mx-auto px-6">
             <h2 class="text-3xl font-semibold tracking-tighter text-center text-zinc-900 dark:text-white mb-12">Frequently Asked Questions</h2>
             
-            <div class="space-y-2">
+            <div class="space-y-2 stagger-children reveal-on-scroll">
                 <!-- FAQ Item 1 -->
                 <div class="group border-b border-zinc-200 dark:border-white/5">
                     <button class="w-full flex items-center justify-between py-6 text-left focus:outline-none" onclick="toggleFaq(this)">
@@ -723,7 +726,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-black pt-20 pb-12 transition-colors duration-500">
+    <footer class="border-t border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-black pt-20 pb-12 transition-colors duration-500 reveal-on-scroll">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
                 <div class="col-span-1">
@@ -783,5 +786,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="particles-config.js"></script>
 
 </body></html>

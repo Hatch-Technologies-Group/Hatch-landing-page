@@ -44,7 +44,7 @@ body {
     100% { clip-path: inset(0 0 0 0); transform: translateY(0); filter: blur(0); }
 }
 .animate-intro {
-    animation: clip-intro 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: clip-intro 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
@@ -52,15 +52,47 @@ body {
 .delay-500 { animation-delay: 500ms; }
 
 .reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(30px) scale(0.98);
-    filter: blur(12px);
-    transition: all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1);
+    opacity: 0 !important;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
 }
 .reveal-on-scroll.is-visible {
+    opacity: 1 !important;
+    transform: translateY(0);
+}
+
+/* Staggered animations for child elements */
+.stagger-children > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.stagger-children.is-visible > * {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
+    transform: translateY(0);
+}
+
+.stagger-children.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+.stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.1s; }
+.stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.15s; }
+.stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.2s; }
+.stagger-children.is-visible > *:nth-child(5) { transition-delay: 0.25s; }
+.stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.3s; }
+.stagger-children.is-visible > *:nth-child(7) { transition-delay: 0.35s; }
+.stagger-children.is-visible > *:nth-child(8) { transition-delay: 0.4s; }
+.stagger-children.is-visible > *:nth-child(9) { transition-delay: 0.45s; }
+.stagger-children.is-visible > *:nth-child(10) { transition-delay: 0.5s; }
+
+/* Faster animation for specific sections */
+.reveal-on-scroll.fast-reveal {
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* Fade-in for footer */
+footer {
+    opacity: 1;
 }
 
 .btn-beam {
@@ -83,7 +115,7 @@ body {
     transition: left 0.8s ease;
 }
 
-/* Updated Infinite Marquee - Right Direction */
+/* Updated Infinite Marquee - Right Direction - Optimized */
 @keyframes marquee-right {
     from { transform: translateX(-50%); }
     to { transform: translateX(0); }
@@ -92,6 +124,7 @@ body {
     display: flex;
     width: max-content;
     animation: marquee-right 60s linear infinite;
+    will-change: transform;
 }
 .animate-marquee-right:hover {
     animation-play-state: paused;
@@ -99,12 +132,13 @@ body {
 
 .carousel-container { perspective: 1200px; }
 .carousel-card {
-    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     backface-visibility: hidden;
     position: absolute;
     width: 100%;
     top: 0;
     left: 0;
+    will-change: transform, opacity;
 }
 .carousel-card.active {
     transform: translateX(0) scale(1) translateZ(0);
@@ -135,8 +169,9 @@ body {
 .perspective-2000 { perspective: 2000px; }
 .hero-interface {
     transform: rotateX(3deg) scale(0.98);
-    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     transform-style: preserve-3d;
+    will-change: transform;
 }
 .hero-interface-container {
     padding: 20px;
@@ -156,6 +191,26 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg-color); }
 ::-webkit-scrollbar-thumb { background: #a1a1aa; border-radius: 3px; }
 .dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
+
+/* Particles.js container styling - Optimized */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+    opacity: 0;
+    animation: particleFadeIn 1.5s ease-in-out 0.3s forwards;
+    will-change: opacity;
+}
+
+@keyframes particleFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+#particles-js canvas {
+    display: block;
+}
 
 .toggle-btn-bg {
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);

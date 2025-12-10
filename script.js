@@ -14,16 +14,35 @@ themeToggleBtn.addEventListener('click', () => {
     localStorage.theme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
 });
 
-// Scroll Reveal
-const observer = new IntersectionObserver((entries, observer) => {
+// Scroll Reveal - Optimized with requestAnimationFrame
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -10% 0px'
+};
+
+const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+            requestAnimationFrame(() => {
+                entry.target.classList.add('is-visible');
+            });
+            revealObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+}, observerOptions);
+
+// Observe all reveal elements
+
+function initRevealOnScroll() {
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    revealElements.forEach(el => revealObserver.observe(el));
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRevealOnScroll);
+} else {
+    initRevealOnScroll();
+}
 
 // Carousel Logic
 const cards = Array.from(document.querySelectorAll('.carousel-card'));
