@@ -3,7 +3,7 @@
 
 const PARTICLE_CONFIG = {
     // ===== MAIN SETTINGS =====
-    particleCount: 62,              // Change this to adjust number of particles
+    particleCount: 80,              // Change this to adjust number of particles
     densityEnabled: true,
     densityArea: 800,
     
