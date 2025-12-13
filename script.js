@@ -94,7 +94,10 @@ const nextBtn = document.getElementById('nextBtn');
 let currentIndex = 0;
 
 const updateCarousel = () => {
-    cards.forEach(card => card.className = card.className.replace(/\b(active|prev|next|hidden-card)\b/g, '').trim() + ' carousel-card');
+    cards.forEach(card => {
+        card.classList.remove('active', 'prev', 'next', 'hidden-card');
+        card.classList.add('carousel-card');
+    });
     const len = cards.length;
     const prevIndex = (currentIndex - 1 + len) % len;
     const nextIndex = (currentIndex + 1) % len;
@@ -103,7 +106,6 @@ const updateCarousel = () => {
     cards[prevIndex].classList.add('prev');
     cards[nextIndex].classList.add('next');
 };
-
 nextBtn?.addEventListener('click', () => { 
     currentIndex = (currentIndex + 1) % cards.length; 
     updateCarousel(); 
