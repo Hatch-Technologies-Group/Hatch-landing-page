@@ -1,8 +1,7 @@
 {
   "name": "main-page",
   "version": "1.0.0",
-  "description": "https://hatch-technologies-group.github.io/Hatch-landing-page/",
-  "main": "particles-config.js",
+  "description": "Hatch landing page with particle background and pricing configurator",
   "scripts": {
     "build": "tailwindcss -i ./styles.css -o ./output.css --minify",
     "dev": "tailwindcss -i ./styles.css -o ./output.css --watch"
