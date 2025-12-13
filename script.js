@@ -1,5 +1,10 @@
+// Performance monitoring
+const perfStart = performance.now();
+console.log('🚀 Hatch Page Loading Started...');
+
 // Initialize Lucide Icons
 lucide.createIcons();
+console.log('✓ Lucide Icons initialized');
 
 // Theme Toggle
 const themeToggleBtn = document.getElementById('themeToggle');
@@ -12,7 +17,9 @@ if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.match
 themeToggleBtn.addEventListener('click', () => {
     htmlElement.classList.toggle('dark');
     localStorage.theme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+    console.log('🌓 Theme toggled to:', localStorage.theme);
 });
+console.log('✓ Theme system initialized');
 
 // Scroll Reveal - Optimized with requestAnimationFrame
 const observerOptions = {
@@ -31,11 +38,14 @@ const revealObserver = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
+console.log('✓ Scroll reveal observer created');
+
 // Observe all reveal elements
 
 function initRevealOnScroll() {
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
     revealElements.forEach(el => revealObserver.observe(el));
+    console.log(`✓ Observing ${revealElements.length} reveal elements`);
 }
 
 if (document.readyState === 'loading') {
@@ -62,6 +72,8 @@ function updateCarousel() {
 nextBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % cards.length; updateCarousel(); });
 prevBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + cards.length) % cards.length; updateCarousel(); });
 
+console.log('✓ Carousel initialized with', cards.length, 'cards');
+
 // Pricing Toggle Logic
 const billingToggle = document.getElementById('billingToggle');
 const toggleBg = document.getElementById('toggleBg');
@@ -76,6 +88,8 @@ const annualSaves = document.querySelectorAll('.annual-save');
 const seatPrices = document.querySelectorAll('.seat-price');
 const annualBadge = document.querySelector('.annual-badge');
 let isAnnual = false;
+
+console.log('✓ Pricing toggle initialized');
 
 billingToggle.addEventListener('click', () => {
     isAnnual = !isAnnual;
@@ -157,14 +171,17 @@ billingToggle.addEventListener('click', () => {
         addonStrikes.forEach(el => el.classList.add('hidden'));
         addonSavings.forEach(el => el.classList.add('hidden'));
     }
+    
+    console.log('💰 Billing switched to:', isAnnual ? 'Annual' : 'Monthly');
 });
 
 // FAQ Accordion
 function toggleFaq(button) {
     const content = button.nextElementSibling;
     const icon = button.querySelector('.faq-icon');
+    const isOpen = content.style.gridTemplateRows === '1fr';
     
-    if (content.style.gridTemplateRows === '1fr') {
+    if (isOpen) {
         content.style.gridTemplateRows = '0fr';
         content.style.opacity = '0';
         icon.style.transform = 'rotate(0deg)';
@@ -176,3 +193,29 @@ function toggleFaq(button) {
         icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus w-4 h-4 text-zinc-900 dark:text-white"><path d="M5 12h14"/></svg>';
     }
 }
+
+console.log('✓ FAQ accordion initialized');
+
+// Performance monitoring end
+window.addEventListener('load', () => {
+    const perfEnd = performance.now();
+    const loadTime = (perfEnd - perfStart).toFixed(2);
+    
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('🎉 Hatch Page Fully Loaded!');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('⏱️  Total Load Time:', loadTime + 'ms');
+    console.log('📊 Performance Metrics:');
+    console.log('   - DOM Content Loaded:', (performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart) + 'ms');
+    console.log('   - Page Load:', (performance.timing.loadEventEnd - performance.timing.navigationStart) + 'ms');
+    console.log('   - DOM Ready:', (performance.timing.domInteractive - performance.timing.navigationStart) + 'ms');
+    
+    // Memory usage (if available)
+    if (performance.memory) {
+        console.log('💾 Memory Usage:');
+        console.log('   - Used:', (performance.memory.usedJSHeapSize / 1048576).toFixed(2) + 'MB');
+        console.log('   - Total:', (performance.memory.totalJSHeapSize / 1048576).toFixed(2) + 'MB');
+    }
+    
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+});
