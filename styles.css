@@ -177,13 +177,18 @@ footer {
     transform: rotateX(3deg) scale(0.98);
     transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     transform-style: preserve-3d;
-    will-change: transform;
 }
 .hero-interface-container {
     padding: 20px;
 }
 .hero-interface-container:hover .hero-interface {
     transform: rotateX(0deg) scale(1);
+}
+
+/* Force image render */
+.hero-interface img {
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .v-line {
@@ -198,17 +203,15 @@ footer {
 ::-webkit-scrollbar-thumb { background: #a1a1aa; border-radius: 3px; }
 .dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
 
-/* Particles.js container styling - Optimized */
 #particles-js {
     position: absolute;
     width: 100%;
     height: 100%;
-    pointer-events: auto;
+    pointer-events: none;
     opacity: 0;
     animation: particleFadeIn 1.2s ease-in-out 0.8s forwards;
     will-change: opacity;
 }
-
 @keyframes particleFadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
@@ -228,4 +231,13 @@ footer {
 }
 .faq-icon {
     transition: transform 0.3s ease;
+}
+
+/* Navbar Theme Styles - CSS-only with dark: variant */
+.nav-bg {
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: background-color 0.3s ease;
+}
+.dark .nav-bg {
+    background-color: rgba(0, 0, 0, 0.8);
 }

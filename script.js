@@ -2,22 +2,53 @@
 const perfStart = performance.now();
 console.log('🚀 Hatch Page Loading Started...');
 
+// Preload hero images immediately
+const preloadImages = () => {
+    const heroImages = document.querySelectorAll('.hero-interface img');
+    heroImages.forEach(img => {
+        if (img.complete) {
+            img.style.opacity = '1';
+        } else {
+            img.addEventListener('load', () => {
+                img.style.opacity = '1';
+            });
+        }
+    });
+    console.log('✓ Hero images preloaded');
+};
+
 // Initialize Lucide Icons
 lucide.createIcons();
 console.log('✓ Lucide Icons initialized');
 
-// Theme Toggle
+// Utility: Toggle classes efficiently
+const toggleClass = (element, removeClass, addClass) => {
+    if (!element) return;
+    element.classList.remove(removeClass);
+    element.classList.add(addClass);
+};
+
+// Theme Toggle - Optimized
 const themeToggleBtn = document.getElementById('themeToggle');
 const htmlElement = document.documentElement;
-if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    htmlElement.classList.add('dark');
-} else {
-    htmlElement.classList.remove('dark');
-}
-themeToggleBtn.addEventListener('click', () => {
+
+// Initialize theme
+const initTheme = () => {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.theme;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        htmlElement.classList.add('dark');
+    } else {
+        htmlElement.classList.remove('dark');
+    }
+};
+
+initTheme();
+
+themeToggleBtn?.addEventListener('click', () => {
     htmlElement.classList.toggle('dark');
     localStorage.theme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
-    console.log('🌓 Theme toggled to:', localStorage.theme);
 });
 console.log('✓ Theme system initialized');
 
@@ -41,12 +72,14 @@ const revealObserver = new IntersectionObserver((entries) => {
 console.log('✓ Scroll reveal observer created');
 
 // Observe all reveal elements
-
-function initRevealOnScroll() {
+const initRevealOnScroll = () => {
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
     revealElements.forEach(el => revealObserver.observe(el));
     console.log(`✓ Observing ${revealElements.length} reveal elements`);
-}
+    
+    // Ensure hero images are loaded
+    preloadImages();
+};
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initRevealOnScroll);
@@ -54,26 +87,34 @@ if (document.readyState === 'loading') {
     initRevealOnScroll();
 }
 
-// Carousel Logic
+// Carousel Logic - Optimized
 const cards = Array.from(document.querySelectorAll('.carousel-card'));
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 let currentIndex = 0;
 
-function updateCarousel() {
-    cards.forEach(card => card.classList.remove('active', 'prev', 'next', 'hidden-card'));
-    const activeIndex = currentIndex;
-    const prevIndex = (currentIndex - 1 + cards.length) % cards.length;
-    const nextIndex = (currentIndex + 1) % cards.length;
-    cards[activeIndex].classList.add('active');
+const updateCarousel = () => {
+    cards.forEach(card => card.className = card.className.replace(/\b(active|prev|next|hidden-card)\b/g, '').trim() + ' carousel-card');
+    const len = cards.length;
+    const prevIndex = (currentIndex - 1 + len) % len;
+    const nextIndex = (currentIndex + 1) % len;
+    
+    cards[currentIndex].classList.add('active');
     cards[prevIndex].classList.add('prev');
     cards[nextIndex].classList.add('next');
-}
-nextBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % cards.length; updateCarousel(); });
-prevBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + cards.length) % cards.length; updateCarousel(); });
+};
+
+nextBtn?.addEventListener('click', () => { 
+    currentIndex = (currentIndex + 1) % cards.length; 
+    updateCarousel(); 
+});
+
+prevBtn?.addEventListener('click', () => { 
+    currentIndex = (currentIndex - 1 + cards.length) % cards.length; 
+    updateCarousel(); 
+});
 
 console.log('✓ Carousel initialized with', cards.length, 'cards');
-
 // Pricing Toggle Logic
 const billingToggle = document.getElementById('billingToggle');
 const toggleBg = document.getElementById('toggleBg');
